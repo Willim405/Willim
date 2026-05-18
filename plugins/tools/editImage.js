@@ -24,7 +24,7 @@ let handler = async (m, { conn, text }) => {
     const formData = new FormData();
     formData.append('image', buffer, 'image.jpg');
     formData.append('prompt', prompt);
-    if (size && validRatios.includes(size)) formData.append('size', size); // لو سبيتها زي مهي هترجع لك نفس عرض الصوره الي حطيتها
+    if (size && validRatios.includes(size)) formData.append('size', size); 
 
     const createRes = await client.post('/process-image', formData, {
       headers: {
