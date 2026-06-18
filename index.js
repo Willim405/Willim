@@ -47,15 +47,16 @@ if (fs.existsSync(mediaPath)) {
     }
 }
 
-// لو مفيش صور، استخدم الروابط القديمة
+// لو مفيش صور، استخدم الروابط الافتراضية
 if (images.length === 0) {
-     images = [
-    path.join(__dirname, 'media', '1m.jpg'),
-    path.join(__dirname, 'media', '2m.jpg'),
-    path.join(__dirname, 'media', '3m.jpg'),
-    path.join(__dirname, 'media', '4m.jpg'),
-    path.join(__dirname, 'media', '5m.jpg')
-];
+    images = [
+        path.join(__dirname, 'media', '1m.jpg'),
+        path.join(__dirname, 'media', '2m.jpg'),
+        path.join(__dirname, 'media', '3m.jpg'),
+        path.join(__dirname, 'media', '4m.jpg'),
+        path.join(__dirname, 'media', '5m.jpg')
+    ];
+}
 
 /* =========== Config ========== */
 const { config } = client;
@@ -72,16 +73,20 @@ config.info = {
     pack: '𝑾𝑰𝑳-🕊', 
     author: '𝑾𝑰𝑳𝑳𝑰𝑨𝑴'
   },
-  images: images
+ images: [
+    "https://i.pinimg.com/originals/11/26/97/11269786cdb625c60213212aa66273a9.png",
+    "https://i.pinimg.com/originals/e2/21/20/e221203f319df949ee65585a657501a2.jpg",
+    "https://i.pinimg.com/originals/bb/77/0f/bb770fad66a634a6b3bf93e9c00bf4e5.jpg"
+  ]
 };
 
 /* =========== Start ========== */
 client.start();
 
 setTimeout(async () => {
-if (client.commandSystem) { 
-sub(client)
-  }
+    if (client.commandSystem) { 
+        await sub(client);  // ← await عشان ينتظر تنفيذ sub
+    }
 }, 2000);
 
 /* =========== Catch Errors ========== */
@@ -92,3 +97,17 @@ process.on('uncaughtException', (e) => {
 process.on('unhandledRejection', (err) => {
     console.error('Unhandled Rejection:', err)
 });
+
+
+/* 
+=========== Memory Monitor ========== 
+
+setInterval(() => {
+    const used = process.memoryUsage().rss / 1024 / 1024
+    if (used > 800) {
+        console.log(`🔄 Bot memory full (${used.toFixed(1)}MB), restarting...`)
+        process.exit(1) 
+    }
+}, 300_000) 
+
+*/
