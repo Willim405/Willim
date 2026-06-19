@@ -12,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const client = new Client({
   phoneNumber: '201038694952',
   prefix: ["."],
-  fromMe: true,
+  fromMe: false,
   owners: [
     { name: "𝑾𝑰𝑳𝑳𝑰𝑨𝑴", jid: "201038694952@s.whatsapp.net", lid: "97307500515336@lid" }
   ],
